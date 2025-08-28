@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kizomba-awards.com/sitemap.xml
