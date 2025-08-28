@@ -1,0 +1,1985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dance Awards SEA 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 300;
+            overflow-x: hidden;
+            background: #2A0810;
+            color: #FAF6F0;
+            line-height: 1.5;
+        }
+
+        /* Gradient Background */
+        #gradient-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 30px;
+            z-index: 1000;
+            background: linear-gradient(180deg, rgba(26,3,8,0.5) 0%, rgba(26,3,8,0) 100%);
+        }
+
+        .nav-container {
+            max-width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 600;
+            color: #F4E4C1;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #E8DCC4;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #F4E4C1;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 95%;
+            margin: 0 auto;
+            padding: 80px 20px 40px;
+            min-height: 100vh;
+        }
+        
+        @media (min-width: 1200px) {
+            .main-container {
+                max-width: 1400px;
+            }
+        }
+
+        /* Hero Section - Compact */
+        .hero {
+            text-align: center;
+            padding: 40px 0 60px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 200;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+            color: #FAF6F0;
+            text-align: center;
+        }
+        
+        .hero-title {
+            animation: fadeInUp 0.8s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .event-info {
+            font-size: 14px;
+            color: #E8DCC4;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* Tab System */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 40px;
+            background: rgba(42, 8, 16, 0.4);
+            padding: 4px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tab-btn {
+            padding: 10px 24px;
+            background: transparent;
+            border: none;
+            color: #C0B5A0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            position: relative;
+            border-radius: 8px;
+        }
+
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(250, 246, 240, 0.08);
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tab-btn.active {
+            color: #FAF6F0;
+            background: rgba(250, 246, 240, 0.1);
+        }
+
+        .tab-btn.active::before {
+            opacity: 1;
+        }
+
+        .tab-btn:hover:not(.active) {
+            color: #E8DCC4;
+            background: rgba(250, 246, 240, 0.05);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Categories Grid - Community Feel */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .category-card {
+            padding: 20px;
+            background: rgba(42, 8, 16, 0.6);
+            border: 1px solid rgba(244, 228, 193, 0.1);
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .category-hover-info {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(42, 8, 16, 0.95);
+            border: 1px solid rgba(250, 246, 240, 0.2);
+            border-radius: 10px;
+            padding: 12px;
+            width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 10;
+            pointer-events: none;
+            backdrop-filter: blur(10px);
+            margin-bottom: 10px;
+        }
+        
+        .category-card:hover .category-hover-info {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .hover-title {
+            color: #FAF6F0;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+        
+        .hover-desc {
+            color: #C0B5A0;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        .category-card:hover {
+            background: rgba(212, 175, 55, 0.08);
+            border-color: rgba(244, 228, 193, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .category-emoji {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .category-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #F4E4C1;
+            margin-bottom: 5px;
+        }
+
+        .category-desc {
+            font-size: 12px;
+            color: #C0B5A0;
+        }
+
+        /* Category Voting Sections */
+        .category-voting-section {
+            margin-bottom: 50px;
+        }
+        
+        .category-section-title {
+            font-size: 18px;
+            color: #FAF6F0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(250, 246, 240, 0.1);
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+        
+        /* Voting Cards */
+        .voting-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .nominee-vote-card {
+            background: rgba(42, 8, 16, 0.65);
+            border: 1px solid rgba(244, 228, 193, 0.12);
+            border-radius: 12px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .nominee-photo {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(244, 228, 193, 0.05));
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            opacity: 0.7;
+        }
+
+        .nominee-vote-card:hover {
+            background: rgba(42, 8, 16, 0.75);
+            border-color: rgba(244, 228, 193, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .nominee-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .nominee-info h3 {
+            font-size: 14px;
+            font-weight: 400;
+            color: #FAF6F0;
+            margin-bottom: 3px;
+        }
+
+        .nominee-info .category-tag {
+            font-size: 10px;
+            color: #C0B5A0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+        }
+
+        .vote-count {
+            font-size: 16px;
+            font-weight: 300;
+            color: #F4E4C1;
+        }
+
+        .vote-btn {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid rgba(250, 246, 240, 0.15);
+            border-radius: 8px;
+            color: #FAF6F0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .vote-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(250, 246, 240, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .vote-btn:hover {
+            background: rgba(250, 246, 240, 0.05);
+            border-color: rgba(250, 246, 240, 0.3);
+            transform: translateY(-1px);
+        }
+        
+        .vote-btn:hover::before {
+            left: 100%;
+        }
+
+        .vote-btn.voted {
+            background: rgba(250, 246, 240, 0.1);
+            border-color: rgba(250, 246, 240, 0.25);
+            color: #FAF6F0;
+        }
+
+        /* Compact Form */
+        .nomination-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: grid;
+            gap: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            font-size: 12px;
+            color: #C0B5A0;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .form-input, .form-select {
+            padding: 12px 15px;
+            background: rgba(42, 8, 16, 0.7);
+            border: 1.5px solid rgba(250, 246, 240, 0.15);
+            border-radius: 10px;
+            color: #FAF6F0;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        
+        .form-select {
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2714%27%20height%3D%278%27%20viewBox%3D%270%200%2014%208%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20d%3D%27M1%201l6%206%206-6%27%20stroke%3D%27%23FAF6F0%27%20stroke-width%3D%271.5%27%20fill%3D%27none%27%20fill-rule%3D%27evenodd%27/%3E%3C/svg%3E');
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 12px;
+            padding-right: 40px;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            background-color: rgba(42, 8, 16, 0.85);
+            border-color: rgba(250, 246, 240, 0.25);
+            border-width: 1.5px;
+        }
+
+        .submit-btn {
+            padding: 14px 40px;
+            background: rgba(42, 8, 16, 0.5);
+            border: 2px solid rgba(250, 246, 240, 0.3);
+            border-radius: 8px;
+            color: #FAF6F0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 20px auto 0;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(250, 246, 240, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s ease, height 0.5s ease;
+        }
+
+        .submit-btn:hover {
+            border-color: rgba(250, 246, 240, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            background: rgba(42, 8, 16, 0.6);
+        }
+        
+        .submit-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Community Message */
+        .community-message {
+            text-align: center;
+            padding: 30px;
+            margin: 30px 0;
+            background: rgba(42, 8, 16, 0.6);
+            border-radius: 15px;
+            border: 1px solid rgba(244, 228, 193, 0.1);
+            backdrop-filter: blur(8px);
+        }
+
+        .community-message h2 {
+            font-size: 20px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #F4E4C1;
+        }
+
+        .community-message p {
+            font-size: 14px;
+            color: #E8DCC4;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(244, 228, 193, 0.08);
+            margin-top: 50px;
+            font-size: 12px;
+            color: #C0B5A0;
+        }
+
+        /* Mobile Navigation Icons */
+        .mobile-nav {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-nav {
+                display: flex;
+                gap: 20px;
+                list-style: none;
+            }
+            
+            .mobile-nav a {
+                color: #E8DCC4;
+                transition: color 0.3s ease;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .mobile-nav svg {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .mobile-nav a:hover, .mobile-nav a.active {
+                color: #FAF6F0;
+            }
+            
+            .mobile-nav a::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 50%;
+                width: 4px;
+                height: 4px;
+                background: #FAF6F0;
+                border-radius: 50%;
+                transform: translateX(-50%) scale(0);
+                transition: transform 0.3s ease;
+            }
+            
+            .mobile-nav a.active::after {
+                transform: translateX(-50%) scale(1);
+            }
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 20px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .voting-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            
+            .nominee-vote-card {
+                padding: 12px;
+            }
+            
+            .nominee-photo {
+                height: 120px;
+                font-size: 36px;
+            }
+            
+            .nominee-info h3 {
+                font-size: 13px;
+            }
+            
+            .vote-count {
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tabs {
+                width: calc(100% - 20px);
+                gap: 0;
+                padding: 3px;
+            }
+            
+            .tab-btn {
+                padding: 8px 12px;
+                font-size: 11px;
+            }
+            
+            .results-preview {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        /* Style for h2 */
+        h2 {
+            font-weight: 300;
+            color: #F4E4C1;
+        }
+
+        /* Style select options */
+        option {
+            background: rgba(42, 8, 16, 0.98);
+            color: #FAF6F0;
+            padding: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        select option:hover {
+            background: rgba(60, 15, 25, 0.98);
+        }
+        
+        select option:checked {
+            background: rgba(250, 246, 240, 0.15);
+        }
+        
+        /* Reason Tags */
+        .reason-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0;
+        }
+        
+        .tag {
+            padding: 6px 12px;
+            background: transparent;
+            border: 1px solid rgba(250, 246, 240, 0.15);
+            border-radius: 20px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #C0B5A0;
+        }
+        
+        .tag:hover {
+            background: rgba(250, 246, 240, 0.05);
+            border-color: rgba(250, 246, 240, 0.25);
+            color: #E8DCC4;
+        }
+        
+        .tag.selected {
+            background: rgba(250, 246, 240, 0.1);
+            border-color: rgba(250, 246, 240, 0.3);
+            color: #FAF6F0;
+        }
+
+        /* Prizes Section */
+        .prizes-section {
+            margin: 40px 0;
+        }
+        
+        .prizes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .prize-card {
+            background: rgba(42, 8, 16, 0.6);
+            border: 1.5px solid rgba(250, 246, 240, 0.15);
+            border-radius: 12px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .prize-card:hover {
+            background: rgba(42, 8, 16, 0.7);
+            border-color: rgba(250, 246, 240, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .prize-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        
+        .prize-card h4 {
+            color: #FAF6F0;
+            font-size: 16px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .prize-card p {
+            color: #C0B5A0;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        
+        /* Results Preview */
+        .results-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .result-category {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(42, 8, 16, 0.4);
+            border-radius: 15px;
+            border: 1px solid rgba(250, 246, 240, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .result-category:hover {
+            background: rgba(42, 8, 16, 0.5);
+            border-color: rgba(250, 246, 240, 0.12);
+            transform: translateY(-2px);
+        }
+        
+        .result-icon {
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+        
+        .result-category h3 {
+            font-size: 18px;
+            color: #FAF6F0;
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+        
+        .result-category p {
+            font-size: 13px;
+            color: #C0B5A0;
+        }
+
+        /* Countdown Timer */
+        .countdown-section {
+            margin: 30px 0 50px 0;
+            text-align: center;
+        }
+        
+        .countdown-title {
+            color: #F4E4C1;
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .countdown-item {
+            background: rgba(42, 8, 16, 0.5);
+            border: 1px solid rgba(244, 228, 193, 0.2);
+            border-radius: 12px;
+            padding: 15px 20px;
+            min-width: 80px;
+        }
+        
+        .countdown-value {
+            display: block;
+            font-size: 32px;
+            font-weight: 300;
+            color: #F4E4C1;
+            margin-bottom: 5px;
+        }
+        
+        .countdown-label {
+            font-size: 11px;
+            color: #C0B5A0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Winners Section */
+        .winners-section {
+            margin: 40px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: #FAF6F0;
+            font-size: 20px;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .winner-category-card {
+            background: rgba(42, 8, 16, 0.5);
+            border: 1px solid rgba(250, 246, 240, 0.15);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(250, 246, 240, 0.1);
+        }
+        
+        .category-header h4 {
+            color: #F4E4C1;
+            font-size: 18px;
+            font-weight: 400;
+        }
+        
+        .total-votes {
+            color: #C0B5A0;
+            font-size: 13px;
+        }
+        
+        .winner-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .winner-position {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .winner-position.first .position-badge {
+            background: linear-gradient(135deg, #FFD700, #F4E4C1);
+            color: #2A0810;
+        }
+        
+        .position-badge {
+            background: rgba(244, 228, 193, 0.15);
+            color: #F4E4C1;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+            min-width: 35px;
+            text-align: center;
+        }
+        
+        .winner-details {
+            flex: 1;
+        }
+        
+        .winner-details h5 {
+            color: #FAF6F0;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+        
+        .vote-bar {
+            background: rgba(250, 246, 240, 0.05);
+            border-radius: 20px;
+            height: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .vote-progress {
+            background: linear-gradient(90deg, rgba(244, 228, 193, 0.3), rgba(244, 228, 193, 0.1));
+            height: 100%;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            transition: width 0.5s ease;
+        }
+        
+        .vote-percentage {
+            color: #FAF6F0;
+            font-size: 11px;
+            white-space: nowrap;
+        }
+        
+        /* Hide scrollbar */
+        ::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+    <!-- Gradient Background -->
+    <canvas id="gradient-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Da.</div>
+            <ul class="nav-links">
+                <li><a href="#" class="tab-link active" data-tab="home">HOME</a></li>
+                <li><a href="#" class="tab-link" data-tab="categories">CATEGORIES</a></li>
+                <li><a href="#" class="tab-link" data-tab="nominate">NOMINATE</a></li>
+                <li><a href="#" class="tab-link" data-tab="vote">VOTE</a></li>
+                <li><a href="#" class="tab-link" data-tab="results">RESULTS</a></li>
+            </ul>
+            <ul class="mobile-nav">
+                <li><a href="#" class="tab-link active" data-tab="home" title="Home">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    </svg>
+                </a></li>
+                <li><a href="#" class="tab-link" data-tab="categories" title="Categories">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+                    </svg>
+                </a></li>
+                <li><a href="#" class="tab-link" data-tab="nominate" title="Nominate">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 20h9"/>
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                    </svg>
+                </a></li>
+                <li><a href="#" class="tab-link" data-tab="vote" title="Vote">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </a></li>
+                <li><a href="#" class="tab-link" data-tab="results" title="Results">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                    </svg>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1 class="hero-title">Dance Awards SEA</h1>
+            <div class="event-info">Kuala Lumpur • March 15, 2025</div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="home">Welcome</button>
+            <button class="tab-btn" data-tab="categories">Categories</button>
+            <button class="tab-btn" data-tab="nominate">Nominate</button>
+            <button class="tab-btn" data-tab="vote">Vote Now</button>
+            <button class="tab-btn" data-tab="results">Results</button>
+        </div>
+
+        <!-- Home Tab -->
+        <div id="home" class="tab-content active">
+            <div class="community-message">
+                <h2>Welcome to Dance Awards SEA</h2>
+                <p style="margin-bottom: 15px;">We are a community-driven initiative celebrating the vibrant Kizomba scene across Southeast Asia.</p>
+                <p style="font-size: 13px; color: #C0B5A0; line-height: 1.6;">Our mission is to unite dancers, instructors, DJs, and venues by recognizing excellence and passion. Through these awards, we strengthen bonds, inspire growth, and celebrate the art that brings us together on the dance floor.</p>
+            </div>
+
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-emoji">🕺</div>
+                    <div class="category-title">Best Lead</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-emoji">💃</div>
+                    <div class="category-title">Best Follower</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-emoji">🌟</div>
+                    <div class="category-title">Rising Star</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-emoji">🎵</div>
+                    <div class="category-title">DJ Award</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-emoji">🎓</div>
+                    <div class="category-title">Instructor of the Year</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-emoji">🏛️</div>
+                    <div class="category-title">Best Venue</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vote Tab -->
+        <div id="vote" class="tab-content">
+            <h2 style="text-align: center; margin-bottom: 30px; font-weight: 300; color: #FAF6F0;">Cast Your Vote</h2>
+            <p style="text-align: center; margin-bottom: 40px; color: #C0B5A0; font-size: 14px;">You can vote once per category</p>
+            
+            <!-- Best Lead Category -->
+            <div class="category-voting-section">
+                <h3 class="category-section-title">Best Lead</h3>
+                <div class="voting-grid">
+                    <div class="nominee-vote-card" data-category="lead">
+                        <div class="nominee-photo">👤</div>
+                        <div class="nominee-header">
+                            <div class="nominee-info">
+                                <h3>Carlos Silva</h3>
+                                <div class="category-tag">Best Lead</div>
+                            </div>
+                            <div class="vote-count" id="carlos-votes">128</div>
+                        </div>
+                        <button class="vote-btn" onclick="vote('carlos', 'lead')">Vote</button>
+                    </div>
+                    <div class="nominee-vote-card" data-category="lead">
+                        <div class="nominee-photo">👤</div>
+                        <div class="nominee-header">
+                            <div class="nominee-info">
+                                <h3>Marcus Tan</h3>
+                                <div class="category-tag">Best Lead</div>
+                            </div>
+                            <div class="vote-count" id="marcus-votes">95</div>
+                        </div>
+                        <button class="vote-btn" onclick="vote('marcus', 'lead')">Vote</button>
+                    </div>
+                    <div class="nominee-vote-card" data-category="lead">
+                        <div class="nominee-photo">👤</div>
+                        <div class="nominee-header">
+                            <div class="nominee-info">
+                                <h3>James Rodriguez</h3>
+                                <div class="category-tag">Best Lead</div>
+                            </div>
+                            <div class="vote-count" id="james-votes">112</div>
+                        </div>
+                        <button class="vote-btn" onclick="vote('james', 'lead')">Vote</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Best Follower Category -->
+            <div class="category-voting-section">
+                <h3 class="category-section-title">Best Follower</h3>
+                <div class="voting-grid">
+                    <div class="nominee-vote-card" data-category="follower">
+                        <div class="nominee-photo">👤</div>
+                        <div class="nominee-header">
+                            <div class="nominee-info">
+                                <h3>Maya Chen</h3>
+                                <div class="category-tag">Best Follower</div>
+                            </div>
+                            <div class="vote-count" id="maya-votes">142</div>
+                        </div>
+                        <button class="vote-btn" onclick="vote('maya', 'follower')">Vote</button>
+                    </div>
+                    <div class="nominee-vote-card" data-category="follower">
+                        <div class="nominee-photo">👤</div>
+                        <div class="nominee-header">
+                            <div class="nominee-info">
+                                <h3>Lisa Wong</h3>
+                                <div class="category-tag">Best Follower</div>
+                            </div>
+                            <div class="vote-count" id="lisa-votes">98</div>
+                        </div>
+                        <button class="vote-btn" onclick="vote('lisa', 'follower')">Vote</button>
+                    </div>
+                    <div class="nominee-vote-card" data-category="follower">
+                        <div class="nominee-photo">👤</div>
+                        <div class="nominee-header">
+                            <div class="nominee-info">
+                                <h3>Sarah Kim</h3>
+                                <div class="category-tag">Best Follower</div>
+                            </div>
+                            <div class="vote-count" id="sarah-votes">87</div>
+                        </div>
+                        <button class="vote-btn" onclick="vote('sarah', 'follower')">Vote</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rising Star Category -->
+            <div class="category-voting-section">
+                <h3 class="category-section-title">Rising Star</h3>
+                <div class="voting-grid">
+                    <div class="nominee-vote-card" data-category="rising">
+                        <div class="nominee-photo">⭐</div>
+                        <div class="nominee-header">
+                            <div class="nominee-info">
+                                <h3>Sophie Lee</h3>
+                                <div class="category-tag">Rising Star</div>
+                            </div>
+                            <div class="vote-count" id="sophie-votes">76</div>
+                        </div>
+                        <button class="vote-btn" onclick="vote('sophie', 'rising')">Vote</button>
+                    </div>
+                    <div class="nominee-vote-card" data-category="rising">
+                        <div class="nominee-photo">⭐</div>
+                        <div class="nominee-header">
+                            <div class="nominee-info">
+                                <h3>Alex Nguyen</h3>
+                                <div class="category-tag">Rising Star</div>
+                            </div>
+                            <div class="vote-count" id="alex-votes">64</div>
+                        </div>
+                        <button class="vote-btn" onclick="vote('alex', 'rising')">Vote</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DJ Award Category -->
+            <div class="category-voting-section">
+                <h3 class="category-section-title">DJ Award</h3>
+                <div class="voting-grid">
+                    <div class="nominee-vote-card" data-category="dj">
+                        <div class="nominee-photo">🎧</div>
+                        <div class="nominee-header">
+                            <div class="nominee-info">
+                                <h3>DJ Alma</h3>
+                                <div class="category-tag">DJ Award</div>
+                            </div>
+                            <div class="vote-count" id="alma-votes">201</div>
+                        </div>
+                        <button class="vote-btn" onclick="vote('alma', 'dj')">Vote</button>
+                    </div>
+                    <div class="nominee-vote-card" data-category="dj">
+                        <div class="nominee-photo">🎧</div>
+                        <div class="nominee-header">
+                            <div class="nominee-info">
+                                <h3>DJ Paulo</h3>
+                                <div class="category-tag">DJ Award</div>
+                            </div>
+                            <div class="vote-count" id="paulo-votes">178</div>
+                        </div>
+                        <button class="vote-btn" onclick="vote('paulo', 'dj')">Vote</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instructor Category -->
+            <div class="category-voting-section">
+                <h3 class="category-section-title">Instructor of the Year</h3>
+                <div class="voting-grid">
+                    <div class="nominee-vote-card" data-category="instructor">
+                        <div class="nominee-photo">🎓</div>
+                        <div class="nominee-header">
+                            <div class="nominee-info">
+                                <h3>Rafael Santos</h3>
+                                <div class="category-tag">Instructor of the Year</div>
+                            </div>
+                            <div class="vote-count" id="rafael-votes">165</div>
+                        </div>
+                        <button class="vote-btn" onclick="vote('rafael', 'instructor')">Vote</button>
+                    </div>
+                    <div class="nominee-vote-card" data-category="instructor">
+                        <div class="nominee-photo">🎓</div>
+                        <div class="nominee-header">
+                            <div class="nominee-info">
+                                <h3>Maria Lopez</h3>
+                                <div class="category-tag">Instructor of the Year</div>
+                            </div>
+                            <div class="vote-count" id="maria-votes">143</div>
+                        </div>
+                        <button class="vote-btn" onclick="vote('maria', 'instructor')">Vote</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Best Venue Category -->
+            <div class="category-voting-section">
+                <h3 class="category-section-title">Best Venue</h3>
+                <div class="voting-grid">
+                    <div class="nominee-vote-card" data-category="venue">
+                        <div class="nominee-photo">🏢</div>
+                        <div class="nominee-header">
+                            <div class="nominee-info">
+                                <h3>Kizomba Nights KL</h3>
+                                <div class="category-tag">Best Venue</div>
+                            </div>
+                            <div class="vote-count" id="kizomba-nights-votes">189</div>
+                        </div>
+                        <button class="vote-btn" onclick="vote('kizomba-nights', 'venue')">Vote</button>
+                    </div>
+                    <div class="nominee-vote-card" data-category="venue">
+                        <div class="nominee-photo">🏢</div>
+                        <div class="nominee-header">
+                            <div class="nominee-info">
+                                <h3>Havana KL - Tuesday</h3>
+                                <div class="category-tag">Best Venue</div>
+                            </div>
+                            <div class="vote-count" id="havana-votes">156</div>
+                        </div>
+                        <button class="vote-btn" onclick="vote('havana', 'venue')">Vote</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nominate Tab -->
+        <div id="nominate" class="tab-content">
+            
+            <form class="nomination-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-input" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <select class="form-select">
+                            <option>Select</option>
+                            <option>Best Lead</option>
+                            <option>Best Follower</option>
+                            <option>Rising Star</option>
+                            <option>DJ Award</option>
+                            <option>Instructor of the Year</option>
+                            <option>Best Venue/Organizer</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Your Name *</label>
+                        <input type="text" class="form-input" placeholder="Your Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Your Email *</label>
+                        <input type="email" class="form-input" placeholder="your@email.com" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Country *</label>
+                        <select class="form-select" required>
+                            <option value="">Select Country</option>
+                            <option>Malaysia</option>
+                            <option>Singapore</option>
+                            <option>Thailand</option>
+                            <option>Indonesia</option>
+                            <option>Philippines</option>
+                            <option>Vietnam</option>
+                            <option>Myanmar</option>
+                            <option>Cambodia</option>
+                            <option>Brunei</option>
+                            <option>Laos</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">City</label>
+                        <input type="text" class="form-input" placeholder="City">
+                    </div>
+                </div>
+
+                <div class="form-group full">
+                    <label class="form-label">Reason</label>
+                    <input type="text" class="form-input" placeholder="Why nominate">
+                </div>
+                
+                <button type="submit" class="submit-btn">Submit Nomination</button>
+            </form>
+        </div>
+
+        <!-- Categories Tab -->
+        <div id="categories" class="tab-content">
+            <div class="community-message" style="margin-bottom: 25px;">
+                <h2 style="font-size: 18px;">Award Categories</h2>
+                <p style="font-size: 13px;">Explore each category to understand what we celebrate</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-hover-info">
+                        <div class="hover-title">Best Lead Award</div>
+                        <div class="hover-desc">Recognizing exceptional leaders who guide with grace, musicality, and create magical connections on the dance floor.</div>
+                    </div>
+                    <div class="category-emoji">🕺</div>
+                    <div class="category-title">Lead</div>
+                    <div class="category-desc">Best Leader</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-hover-info">
+                        <div class="hover-title">Best Follower Award</div>
+                        <div class="hover-desc">Celebrating followers who bring creativity, sensitivity, and beautiful expression to every dance.</div>
+                    </div>
+                    <div class="category-emoji">💃</div>
+                    <div class="category-title">Follower</div>
+                    <div class="category-desc">Best Follower</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-hover-info">
+                        <div class="hover-title">Rising Star Award</div>
+                        <div class="hover-desc">Honoring promising new talents who show exceptional growth and dedication to Kizomba.</div>
+                    </div>
+                    <div class="category-emoji">🌟</div>
+                    <div class="category-title">Rising Star</div>
+                    <div class="category-desc">New Talent</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-hover-info">
+                        <div class="hover-title">DJ Excellence Award</div>
+                        <div class="hover-desc">For DJs who create unforgettable musical journeys and keep our souls dancing all night.</div>
+                    </div>
+                    <div class="category-emoji">🎵</div>
+                    <div class="category-title">DJ Award</div>
+                    <div class="category-desc">Musical Master</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-hover-info">
+                        <div class="hover-title">Instructor of the Year</div>
+                        <div class="hover-desc">Recognizing teachers who inspire, nurture, and spread the love of Kizomba through their dedication.</div>
+                    </div>
+                    <div class="category-emoji">🎓</div>
+                    <div class="category-title">Instructor</div>
+                    <div class="category-desc">Teacher of Year</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-hover-info">
+                        <div class="hover-title">Best Venue/Organizer</div>
+                        <div class="hover-desc">Celebrating venues and organizers who create amazing spaces for our community to connect and dance.</div>
+                    </div>
+                    <div class="category-emoji">🏢</div>
+                    <div class="category-title">Venue</div>
+                    <div class="category-desc">Best Organizer</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Tab -->
+        <div id="results" class="tab-content">
+            <div class="community-message">
+                <h2>Live Results & Winners</h2>
+                <p style="margin-bottom: 20px; font-size: 16px; color: #FAF6F0;">March 15, 2025 • Kuala Lumpur</p>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div class="countdown-section">
+                <h3 class="countdown-title">Awards Ceremony Countdown</h3>
+                <div class="countdown-timer" id="countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="days">45</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="hours">12</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="minutes">34</span>
+                        <span class="countdown-label">Minutes</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-value" id="seconds">56</span>
+                        <span class="countdown-label">Seconds</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Winners -->
+            <div class="winners-section">
+                <h3 class="section-title">Leading by Category</h3>
+                
+                <!-- Best Lead Winner -->
+                <div class="winner-category-card">
+                    <div class="category-header">
+                        <h4>Best Lead</h4>
+                        <span class="total-votes" id="lead-total">335 votes</span>
+                    </div>
+                    <div class="winner-info">
+                        <div class="winner-position first" id="lead-1st">
+                            <span class="position-badge">1st</span>
+                            <div class="winner-details">
+                                <h5>Carlos Silva</h5>
+                                <div class="vote-bar">
+                                    <div class="vote-progress" style="width: 38%" id="carlos-progress">
+                                        <span class="vote-percentage" id="carlos-percent">128 votes (38%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="winner-position" id="lead-2nd">
+                            <span class="position-badge">2nd</span>
+                            <div class="winner-details">
+                                <h5>James Rodriguez</h5>
+                                <div class="vote-bar">
+                                    <div class="vote-progress" style="width: 33%" id="james-progress">
+                                        <span class="vote-percentage" id="james-percent">112 votes (33%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="winner-position" id="lead-3rd">
+                            <span class="position-badge">3rd</span>
+                            <div class="winner-details">
+                                <h5>Marcus Tan</h5>
+                                <div class="vote-bar">
+                                    <div class="vote-progress" style="width: 28%" id="marcus-progress">
+                                        <span class="vote-percentage" id="marcus-percent">95 votes (28%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Best Follower Winner -->
+                <div class="winner-category-card">
+                    <div class="category-header">
+                        <h4>Best Follower</h4>
+                        <span class="total-votes" id="follower-total">327 votes</span>
+                    </div>
+                    <div class="winner-info">
+                        <div class="winner-position first" id="follower-1st">
+                            <span class="position-badge">1st</span>
+                            <div class="winner-details">
+                                <h5>Maya Chen</h5>
+                                <div class="vote-bar">
+                                    <div class="vote-progress" style="width: 43%" id="maya-progress">
+                                        <span class="vote-percentage" id="maya-percent">142 votes (43%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="winner-position" id="follower-2nd">
+                            <span class="position-badge">2nd</span>
+                            <div class="winner-details">
+                                <h5>Lisa Wong</h5>
+                                <div class="vote-bar">
+                                    <div class="vote-progress" style="width: 30%" id="lisa-progress">
+                                        <span class="vote-percentage" id="lisa-percent">98 votes (30%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="winner-position" id="follower-3rd">
+                            <span class="position-badge">3rd</span>
+                            <div class="winner-details">
+                                <h5>Sarah Kim</h5>
+                                <div class="vote-bar">
+                                    <div class="vote-progress" style="width: 27%" id="sarah-progress">
+                                        <span class="vote-percentage" id="sarah-percent">87 votes (27%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rising Star Winner -->
+                <div class="winner-category-card">
+                    <div class="category-header">
+                        <h4>Rising Star</h4>
+                        <span class="total-votes" id="rising-total">140 votes</span>
+                    </div>
+                    <div class="winner-info">
+                        <div class="winner-position first" id="rising-1st">
+                            <span class="position-badge">1st</span>
+                            <div class="winner-details">
+                                <h5>Sophie Lee</h5>
+                                <div class="vote-bar">
+                                    <div class="vote-progress" style="width: 54%" id="sophie-progress">
+                                        <span class="vote-percentage" id="sophie-percent">76 votes (54%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="winner-position" id="rising-2nd">
+                            <span class="position-badge">2nd</span>
+                            <div class="winner-details">
+                                <h5>Alex Nguyen</h5>
+                                <div class="vote-bar">
+                                    <div class="vote-progress" style="width: 46%" id="alex-progress">
+                                        <span class="vote-percentage" id="alex-percent">64 votes (46%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DJ Award Winner -->
+                <div class="winner-category-card">
+                    <div class="category-header">
+                        <h4>DJ Award</h4>
+                        <span class="total-votes" id="dj-total">379 votes</span>
+                    </div>
+                    <div class="winner-info">
+                        <div class="winner-position first" id="dj-1st">
+                            <span class="position-badge">1st</span>
+                            <div class="winner-details">
+                                <h5>DJ Alma</h5>
+                                <div class="vote-bar">
+                                    <div class="vote-progress" style="width: 53%" id="alma-progress">
+                                        <span class="vote-percentage" id="alma-percent">201 votes (53%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="winner-position" id="dj-2nd">
+                            <span class="position-badge">2nd</span>
+                            <div class="winner-details">
+                                <h5>DJ Paulo</h5>
+                                <div class="vote-bar">
+                                    <div class="vote-progress" style="width: 47%" id="paulo-progress">
+                                        <span class="vote-percentage" id="paulo-percent">178 votes (47%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instructor Winner -->
+                <div class="winner-category-card">
+                    <div class="category-header">
+                        <h4>Instructor of the Year</h4>
+                        <span class="total-votes" id="instructor-total">308 votes</span>
+                    </div>
+                    <div class="winner-info">
+                        <div class="winner-position first" id="instructor-1st">
+                            <span class="position-badge">1st</span>
+                            <div class="winner-details">
+                                <h5>Rafael Santos</h5>
+                                <div class="vote-bar">
+                                    <div class="vote-progress" style="width: 54%" id="rafael-progress">
+                                        <span class="vote-percentage" id="rafael-percent">165 votes (54%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="winner-position" id="instructor-2nd">
+                            <span class="position-badge">2nd</span>
+                            <div class="winner-details">
+                                <h5>Maria Lopez</h5>
+                                <div class="vote-bar">
+                                    <div class="vote-progress" style="width: 46%" id="maria-progress">
+                                        <span class="vote-percentage" id="maria-percent">143 votes (46%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Venue Winner -->
+                <div class="winner-category-card">
+                    <div class="category-header">
+                        <h4>Best Venue</h4>
+                        <span class="total-votes" id="venue-total">345 votes</span>
+                    </div>
+                    <div class="winner-info">
+                        <div class="winner-position first" id="venue-1st">
+                            <span class="position-badge">1st</span>
+                            <div class="winner-details">
+                                <h5>Kizomba Nights KL</h5>
+                                <div class="vote-bar">
+                                    <div class="vote-progress" style="width: 55%" id="kizomba-nights-progress">
+                                        <span class="vote-percentage" id="kizomba-nights-percent">189 votes (55%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="winner-position" id="venue-2nd">
+                            <span class="position-badge">2nd</span>
+                            <div class="winner-details">
+                                <h5>Havana KL - Tuesday</h5>
+                                <div class="vote-bar">
+                                    <div class="vote-progress" style="width: 45%" id="havana-progress">
+                                        <span class="vote-percentage" id="havana-percent">156 votes (45%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="prizes-section">
+                <h3 class="prizes-title">🏆 What Winners Receive</h3>
+                <div class="prizes-grid">
+                    <div class="prize-card">
+                        <div class="prize-icon">🏆</div>
+                        <h4>Trophy</h4>
+                        <p>Custom-designed award trophy for each category winner</p>
+                    </div>
+                    <div class="prize-card">
+                        <div class="prize-icon">🎉</div>
+                        <h4>Gala Dinner</h4>
+                        <p>VIP invitation to exclusive awards ceremony & celebration</p>
+                    </div>
+                    <div class="prize-card">
+                        <div class="prize-icon">🎤</div>
+                        <h4>Performance</h4>
+                        <p>Showcase opportunity at major SEA Kizomba events</p>
+                    </div>
+                    <div class="prize-card">
+                        <div class="prize-icon">🌐</div>
+                        <h4>Recognition</h4>
+                        <p>Featured on Dance Awards SEA platform & social media</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="results-preview">
+                <div class="result-category">
+                    <div class="result-icon">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#C0B5A0" stroke-width="1">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                        </svg>
+                    </div>
+                    <h3>6 Categories</h3>
+                    <p>Celebrating Excellence</p>
+                </div>
+                <div class="result-category">
+                    <div class="result-icon">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#C0B5A0" stroke-width="1">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>Community Vote</h3>
+                    <p>Your Voice Matters</p>
+                </div>
+                <div class="result-category">
+                    <div class="result-icon">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#C0B5A0" stroke-width="1">
+                            <circle cx="12" cy="8" r="7"/>
+                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+                        </svg>
+                    </div>
+                    <h3>March 15, 2025</h3>
+                    <p>Grand Ceremony</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- About Tab (keeping for backward compatibility but hidden) -->
+        <div id="about" class="tab-content" style="display: none;">
+            <div class="community-message">
+                <h2>About</h2>
+                <p>Celebrating Southeast Asia's Kizomba community</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2025 Dance Awards SEA</p>
+        </footer>
+    </div>
+
+    <script>
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const navLinks = document.querySelectorAll('.tab-link');
+
+        function switchTab(tabId) {
+            // Update tab buttons
+            tabButtons.forEach(btn => {
+                if (btn.dataset.tab === tabId) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Update nav links
+            navLinks.forEach(link => {
+                if (link.dataset.tab === tabId) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            // Update content
+            tabContents.forEach(content => {
+                if (content.id === tabId) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+        }
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                switchTab(button.dataset.tab);
+            });
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchTab(link.dataset.tab);
+            });
+        });
+
+        // Voting functionality
+        const votes = {
+            'maya': 142,
+            'carlos': 128,
+            'marcus': 95,
+            'james': 112,
+            'lisa': 98,
+            'sarah': 87,
+            'sophie': 76,
+            'alex': 64,
+            'alma': 201,
+            'paulo': 178,
+            'rafael': 165,
+            'maria': 143,
+            'kizomba-nights': 189,
+            'havana': 156
+        };
+        
+        function toggleTag(element) {
+            element.classList.toggle('selected');
+        }
+
+        const votedCategories = new Map();
+
+        function vote(nominee, category) {
+            // Check if already voted in this category
+            if (votedCategories.has(category)) {
+                // Remove vote from previous nominee
+                const previousNominee = votedCategories.get(category);
+                if (previousNominee !== nominee) {
+                    votes[previousNominee]--;
+                    document.getElementById(previousNominee + '-votes').textContent = votes[previousNominee];
+                }
+            }
+            
+            // Update vote count
+            votes[nominee]++;
+            document.getElementById(nominee + '-votes').textContent = votes[nominee];
+            votedCategories.set(category, nominee);
+            
+            // Update all buttons in this category
+            const categoryCards = document.querySelectorAll(`[data-category="${category}"] .vote-btn`);
+            categoryCards.forEach(btn => {
+                const card = btn.closest('.nominee-vote-card');
+                const nomineeId = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
+                
+                if (nomineeId === nominee) {
+                    btn.classList.add('voted');
+                    btn.textContent = 'Your Vote ✓';
+                    btn.style.opacity = '1';
+                } else {
+                    btn.classList.remove('voted');
+                    btn.textContent = 'Vote';
+                    btn.style.opacity = '0.5';
+                }
+            });
+            
+            // Update results page
+            updateResults();
+        }
+
+        // Update results dynamically
+        function updateResults() {
+            // Calculate totals and percentages for each category
+            const categories = {
+                lead: ['carlos', 'marcus', 'james'],
+                follower: ['maya', 'lisa', 'sarah'],
+                rising: ['sophie', 'alex'],
+                dj: ['alma', 'paulo'],
+                instructor: ['rafael', 'maria'],
+                venue: ['kizomba-nights', 'havana']
+            };
+
+            Object.entries(categories).forEach(([category, nominees]) => {
+                const total = nominees.reduce((sum, n) => sum + votes[n], 0);
+                const totalElement = document.getElementById(`${category}-total`);
+                if (totalElement) totalElement.textContent = `${total} votes`;
+
+                // Sort nominees by votes
+                const sorted = nominees.sort((a, b) => votes[b] - votes[a]);
+                
+                sorted.forEach((nominee, index) => {
+                    const percent = total > 0 ? Math.round((votes[nominee] / total) * 100) : 0;
+                    const progressBar = document.getElementById(`${nominee}-progress`);
+                    const percentText = document.getElementById(`${nominee}-percent`);
+                    
+                    if (progressBar) {
+                        progressBar.style.width = `${percent}%`;
+                    }
+                    if (percentText) {
+                        percentText.textContent = `${votes[nominee]} votes (${percent}%)`;
+                    }
+                });
+            });
+        }
+
+        // Countdown Timer
+        function updateCountdown() {
+            const eventDate = new Date('March 15, 2025 20:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+
+            if (daysEl) daysEl.textContent = days;
+            if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+            if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+            if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                const countdownSection = document.querySelector('.countdown-section');
+                if (countdownSection) {
+                    countdownSection.innerHTML = '<h3 class="countdown-title">The Awards Ceremony Has Begun!</h3>';
+                }
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+        updateResults();
+
+        // Form submission
+        document.querySelector('.nomination-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your nomination! We appreciate your participation in celebrating our community.');
+            e.target.reset();
+        });
+
+        // Gradient animation
+        const canvas = document.getElementById('gradient-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let time = 0;
+        const blobs = [];
+
+        for (let i = 0; i < 7; i++) {
+            blobs.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                vx: (Math.random() - 0.5) * 0.8,
+                vy: (Math.random() - 0.5) * 0.8,
+                size: 300 + Math.random() * 400,
+                phase: Math.random() * Math.PI * 2,
+                speed: 0.3 + Math.random() * 0.5,
+                hue: Math.random() * 20 - 10
+            });
+        }
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function animate() {
+            time += 0.008;
+            
+            // More reddish background
+            ctx.fillStyle = '#2A0810';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            blobs.forEach((blob, index) => {
+                blob.x += blob.vx + Math.sin(time * blob.speed + blob.phase) * 0.5;
+                blob.y += blob.vy + Math.cos(time * blob.speed * 0.7 + blob.phase) * 0.5;
+                
+                if (blob.x < -blob.size || blob.x > canvas.width + blob.size) {
+                    blob.vx *= -0.9;
+                }
+                if (blob.y < -blob.size || blob.y > canvas.height + blob.size) {
+                    blob.vy *= -0.9;
+                }
+                
+                const gradient = ctx.createRadialGradient(blob.x, blob.y, 0, blob.x, blob.y, blob.size);
+                
+                // Keep colors in red/pink range
+                const hue = 355 + blob.hue + Math.sin(time * blob.speed) * 8;
+                const sat = 85 + Math.sin(time * blob.speed + blob.phase) * 10;
+                const light = 45 + Math.sin(time * blob.speed * 0.5) * 15;
+                
+                // Stronger, more visible gradients
+                gradient.addColorStop(0, `hsla(${hue}, ${sat}%, ${light}%, 0.45)`);
+                gradient.addColorStop(0.4, `hsla(${hue - 10}, ${sat - 5}%, ${light - 5}%, 0.25)`);
+                gradient.addColorStop(0.7, `hsla(${hue - 15}, ${sat - 10}%, ${light - 10}%, 0.15)`);
+                gradient.addColorStop(1, 'rgba(180, 20, 60, 0)');
+                
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            });
+            
+            // Add subtle persistent red overlay to maintain reddish tone
+            const overlayGradient = ctx.createRadialGradient(
+                canvas.width * 0.5, canvas.height * 0.5, 0,
+                canvas.width * 0.5, canvas.height * 0.5, Math.max(canvas.width, canvas.height) * 0.7
+            );
+            overlayGradient.addColorStop(0, 'rgba(220, 30, 80, 0.03)');
+            overlayGradient.addColorStop(0.5, 'rgba(180, 20, 60, 0.02)');
+            overlayGradient.addColorStop(1, 'rgba(139, 0, 48, 0.01)');
+            ctx.fillStyle = overlayGradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Grain effect
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            
+            for (let i = 0; i < data.length; i += 4) {
+                const grain = (Math.random() - 0.5) * 30;
+                data[i] = Math.min(255, Math.max(0, data[i] + grain));
+                data[i + 1] = Math.min(255, Math.max(0, data[i + 1] + grain));
+                data[i + 2] = Math.min(255, Math.max(0, data[i + 2] + grain));
+            }
+            
+            ctx.putImageData(imageData, 0, 0);
+
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        animate();
+    </script>
+</body>
+</html>

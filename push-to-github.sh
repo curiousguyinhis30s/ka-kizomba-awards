@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo "🚀 Pushing KA - Kizomba Awards to GitHub..."
+echo ""
+echo "Since authentication is needed, you have two options:"
+echo ""
+echo "Option 1: Use GitHub Personal Access Token"
+echo "1. Go to: https://github.com/settings/tokens/new"
+echo "2. Create a token with 'repo' permissions"
+echo "3. Run: git push https://curiousguyinhis30s:YOUR_TOKEN@github.com/curiousguyinhis30s/ka-kizomba-awards.git main"
+echo ""
+echo "Option 2: Open GitHub Desktop"
+echo "1. Add existing repository: /Users/samiullah/dance-awards-mvp"
+echo "2. Publish repository"
+echo ""
+echo "After pushing, go back to Vercel.com/new to import the repository!"
